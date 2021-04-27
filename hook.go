@@ -2,8 +2,9 @@ package logrusly
 
 import (
 	"strings"
+	"time"
 
-	"github.com/segmentio/go-loggly"
+	"github.com/alex347/go-loggly"
 	"github.com/sirupsen/logrus"
 )
 
@@ -97,6 +98,11 @@ func (hook *LogglyHook) Fire(entry *logrus.Entry) error {
 	}
 
 	return nil
+}
+
+//SetTimeout sets timeout for HTTP requests.
+func (hook *LogglyHook) SetTimeout(timeout time.Duration) {
+	hook.client.SetTimeout(timeout)
 }
 
 // Flush sends buffered events to Loggly.
